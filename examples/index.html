@@ -4,11 +4,15 @@
 		<meta charset="utf-8">
 		<title>Pixelate.js</title>
 		<style type="text/css">
-			img, canvas { border:1px dashed; }
+			img {
+				border: 1px;}
+
+			canvas { border:1px dashed; }
 		</style>
 	</head>
 	<body>
-		<img src="http://i.imgur.com/E7iu3UI.jpg" width="630" height="583" data-pixelate>
+		<img src="http://www.brainpool.de/var/brainpool/storage/images/kuenstler/lena-meyer-landrut/lena-meyer-landrut/lena-meyer-landrut-06/10852-1-ger-DE/Lena-Meyer-Landrut-06_gallery_image.jpg" width="630" height="583" data-pixelate data-value="0.1" data-reveal="true">
+		<canvas id="canvas" width="800" height="680">not support canvas</canvas>
 		<script src="../dist/pixelate.js"></script>
 	</body>
 </html>

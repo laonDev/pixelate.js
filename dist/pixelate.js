@@ -9,7 +9,7 @@
 		var defaults = {
 			value: 0.05,
 			reveal: true,
-			revealonclick: false
+			revealonclick: true
 		};
 		var options = arguments[1] || {};
 		var element = this, //arguments[0],
@@ -36,7 +36,7 @@
 			imgWidth = element.width,
 			imgHeight = element.height,
 			revealed = false;
-		var canv = document.createElement('canvas');
+		var canv = document.getElementById('canvas');
 		canv.width = imgWidth;
 		canv.height = imgHeight;
 		var ctx = canv.getContext('2d');
@@ -45,10 +45,13 @@
 		ctx.imageSmoothingEnabled = false;
 		var width = imgWidth * options.value,
 			height = imgHeight * options.value;
-		ctx.drawImage(element, 0, 0, width, height);
+		ctx.drawImage(element, 0, 0, imgWidth, imgHeight);
+		var cloppedImage = ctx.getImageData(100, 100, 100, 100);
+
+		// ctx.putImageData(cloppedImage, );
 		ctx.drawImage(canv, 0, 0, width, height, 0, 0, canv.width, canv.height);
-		element.style.display = 'none';
-		elementParent.insertBefore(canv, element);
+		// element.style.display = 'none';
+		// elementParent.insertBefore(canv, element);
 		if(options.revealonclick !== false && options.revealonclick !== 'false') {
 			/*
 			 * Reveal on click
@@ -58,7 +61,7 @@
 				if(revealed) {
 					ctx.drawImage(element, 0, 0, imgWidth, imgHeight);
 				} else {
-					ctx.drawImage(element, 0, 0, width, height);
+					ctx.drawImage(element, imgWidth/2, imgHeight/2, width, height);
 					ctx.drawImage(canv, 0, 0, width, height, 0, 0, canv.width, canv.height);
 				}
 			});
@@ -74,7 +77,7 @@
 			canv.addEventListener('mouseleave', function(e) {
 				if(revealed) return;
 				ctx.drawImage(element, 0, 0, width, height);
-				ctx.drawImage(canv, 0, 0, width, height, 0, 0, canv.width, canv.height);
+				// ctx.drawImage(canv, 0, 0, width, height, 0, 0, canv.width, canv.height);
 			});
 		}
 	};
